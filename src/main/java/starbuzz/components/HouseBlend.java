@@ -1,6 +1,10 @@
 package starbuzz.components;
 
-public class HouseBlend extends Beverage {
+public class HouseBlend extends SizedBeverage {
+
+    public HouseBlend(BeverageSize size) {
+        super(size);
+    }
 
     @Override
     public String description() {
@@ -8,7 +12,7 @@ public class HouseBlend extends Beverage {
     }
 
     @Override
-    public double cost() {
+    public double baseCost() {
         return 0.89;
     }
 }

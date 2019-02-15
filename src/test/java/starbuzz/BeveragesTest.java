@@ -7,25 +7,24 @@ import org.junit.jupiter.params.provider.MethodSource;
 import starbuzz.components.*;
 import starbuzz.decorators.*;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static starbuzz.components.BeverageSize.*;
 
 class BeveragesTest {
 
     @Test
     void decaf_with_steamed_milk_and_whip_should_cost_1_25() {
-        Beverage beverage = new Whip(new SteamedMilk(new Decaf()));
+        Beverage beverage = new Whip(new SteamedMilk(new Decaf(TALL)));
         assertEquals(1.25, beverage.cost(), 0.01);
     }
 
     @Test
     void espresso_with_mocha_should_cost_2_29() {
-        Beverage beverage = new Mocha(new Espresso());
+        Beverage beverage = new Mocha(new Espresso(TALL));
         assertEquals(2.19, beverage.cost(), 0.01);
     }
 
@@ -60,7 +59,7 @@ class BeveragesTest {
     }
 
     private Beverage createBeverage(Class<Beverage> component, List<Class<Condiment>> decorators) throws Exception {
-        Beverage beverage = component.getConstructor().newInstance();
+        Beverage beverage = component.getConstructor(BeverageSize.class).newInstance(TALL);
         for (var decorator : decorators) {
             beverage = decorator.getConstructor(Beverage.class).newInstance(beverage);
         }
