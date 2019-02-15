@@ -8,12 +8,12 @@ public class Soy extends Condiment {
     }
 
     @Override
-    public String description() {
-        return beverage.description() + " + Soy";
+    public String name() {
+        return "Soy";
     }
 
     @Override
-    public double cost() {
-        return beverage.cost() + 0.15;
+    public double extraCost() {
+        return 0.15;
     }
 }

@@ -8,12 +8,12 @@ public class Mocha extends Condiment {
     }
 
     @Override
-    public String description() {
-        return beverage.description() + " + Mocha";
+    public String name() {
+        return "Mocha";
     }
 
     @Override
-    public double cost() {
-        return beverage.cost() + .2;
+    public double extraCost() {
+        return 0.2;
     }
 }

@@ -9,12 +9,12 @@ public class SteamedMilk extends Condiment {
     }
 
     @Override
-    public String description() {
-        return beverage.description() + " + Steamed Milk";
+    public String name() {
+        return "Steamed Milk";
     }
 
     @Override
-    public double cost() {
-        return beverage.cost() + .10;
+    public double extraCost() {
+        return .10;
     }
 }

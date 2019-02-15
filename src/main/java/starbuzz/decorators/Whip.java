@@ -8,12 +8,12 @@ public class Whip extends Condiment {
     }
 
     @Override
-    public String description() {
-        return beverage.description() + " + Whip";
+    public String name() {
+        return "Whip";
     }
 
     @Override
-    public double cost() {
-        return beverage.cost() + 0.10;
+    public double extraCost() {
+        return 0.10;
     }
 }
