@@ -27,7 +27,7 @@ class BeveragesTest {
     }
 
     @ParameterizedTest
-    @MethodSource("coffees")
+    @MethodSource("coffeeCosts")
     void coffees_are_billed_correctly(Class<Beverage> component, Set<Class<Condiment>> decorators, double expectedCost) throws Exception {
         Beverage beverage = component.getConstructor().newInstance();
 
@@ -38,10 +38,27 @@ class BeveragesTest {
         assertEquals(expectedCost, beverage.cost(), 0.01);
     }
 
-    private static Stream<Arguments> coffees() {
+    private static Stream<Arguments> coffeeCosts() {
         return Stream.of(
                 Arguments.of(Espresso.class, Set.of(Mocha.class), 2.19)
         );
     }
 
+    @ParameterizedTest
+    @MethodSource("coffeeDescriptions")
+    void coffees_are_described_correctly(Class<Beverage> component, Set<Class<Condiment>> decorators, String expectedDescription) throws Exception {
+        Beverage beverage = component.getConstructor().newInstance();
+
+        for (var decorator: decorators) {
+            beverage = decorator.getConstructor(Beverage.class).newInstance(beverage);
+        }
+
+        assertEquals(expectedDescription, beverage.description());
+    }
+
+    private static Stream<Arguments> coffeeDescriptions() {
+        return Stream.of(
+                Arguments.of(Espresso.class, Set.of(Mocha.class), "Espresso + Mocha")
+        );
+    }
 }
